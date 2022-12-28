@@ -5,6 +5,8 @@ import (
 	"encoding/xml"
 	"fmt"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 type Student struct {
@@ -34,4 +36,10 @@ func getAllStudents(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(students)
 	}
 
+}
+
+func getAStudent(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+
+	fmt.Fprintf(w, "Parameter received ", params["student_id"])
 }
