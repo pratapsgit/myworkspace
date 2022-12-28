@@ -7,9 +7,11 @@ import (
 )
 
 func Start() {
-	http.HandleFunc("/greet", greet)
-	http.HandleFunc("/students", getAllStudents)
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("/greet", greet)
+	mux.HandleFunc("/students", getAllStudents)
 
 	fmt.Println("Server will be listening on port 8000...")
-	log.Fatal(http.ListenAndServe("localhost:8000", nil))
+	log.Fatal(http.ListenAndServe("localhost:8000", mux))
 }
