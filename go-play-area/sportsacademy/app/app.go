@@ -13,7 +13,8 @@ import (
 func Start() {
 	router := mux.NewRouter()
 
-	ph := sports.PlayerHandlers{Playerservice: service.NewPlayerService(domain.NewPlayerRepositoryStub())}
+	//ph := sports.PlayerHandlers{Playerservice: service.NewPlayerService(domain.NewPlayerRepositoryStub())}
+	ph := sports.PlayerHandlers{Playerservice: service.NewPlayerService(domain.NewPlayerRepositoryDb())}
 	router.HandleFunc("/players", ph.GetAllPlayers)
 
 	log.Fatal(http.ListenAndServe("localhost:8090", router))
