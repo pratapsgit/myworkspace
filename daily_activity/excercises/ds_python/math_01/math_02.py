@@ -132,3 +132,15 @@ U, S, VT = np.linalg.svd(a33_svd)
 print("U of 3x3 matrix: \n", U)
 print("S of 3x3 matrix: \n", S)
 print("VT of 3x3 matrix: \n", VT)
+
+
+# Reconstruct the matrix from U, S and VT
+# A = U * S * VT
+
+Su = np.zeros((U.shape[0], VT.shape[0]))
+np.fill_diagonal(Su, S)
+reconstructed_matrix = np.dot(U, np.dot(Su, VT))
+print("Reconstructed matrix: \n", reconstructed_matrix)
+# Check if the reconstructed matrix is equal to the original matrix
+is_equal = np.allclose(reconstructed_matrix, a33_svd)
+print("Is the reconstructed matrix equal to the original matrix? ", is_equal)
